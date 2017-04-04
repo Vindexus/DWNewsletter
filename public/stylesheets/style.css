@@ -1,0 +1,57 @@
+body {
+  padding: 100px 0 0 0;
+  background: #A1A1A1 top center no-repeat fixed;
+  background-size: cover;
+}
+
+a {
+  color: #00B7FF;
+}
+
+#landing-page {
+  max-width: 700px;
+  padding: 2em;
+  background: #eee;
+  border-radius: 5px;
+}
+
+#landing-page .hero {
+  text-align: center;
+}
+
+#mc_embed_signup {
+  margin: 2em 2em 0px;
+  background: #ccc;
+  padding: 1em 1.5em;
+  border-radius: 3px;
+}
+
+#about {
+  position: fixed;
+  bottom: 20px;
+  left: 0%;
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  font-size: 80%;
+}
+
+#about .container {
+  background: rgba(0,0,0,0.45);
+  padding: 1em;
+  border-radius: 5px;
+}
+
+#about .about {
+  text-align: justify;
+}
+
+#about .links {
+  text-align: center;
+  margin-top: 0.25em;
+}
+
+#about a  {
+  color: #aaa;
+  text-decoration: none;
+}
