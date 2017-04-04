@@ -29,6 +29,7 @@ a {
   padding: 2em;
   background: #eee;
   border-radius: 5px;
+  margin-bottom: 20px;
 }
 
 #landing-page .hero {
@@ -39,13 +40,13 @@ a {
   margin-top: 1.5em;
 }
 
+.response-container {
+  margin-top: 0.5em;
+}
+
 #about {
-  position: fixed;
-  bottom: 20px;
-  left: 0%;
-  width: 100%;
   text-align: center;
-  color: #fff;
+  color: #ccc;
   font-size: 80%;
 }
 
@@ -66,4 +67,10 @@ a {
 
 #about a  {
   text-decoration: none;
+  opacity: 0.75;
+}
+
+#about a:hover {
+  opacity: 1;
+  color: #0275d8;
 }
