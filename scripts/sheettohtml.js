@@ -49,7 +49,17 @@ axios.get("https://spreadsheets.google.com/feeds/list/1Iv93PGR6NiggbdQeksUcc5p8R
     entries = entries.map((entry) => {
       var html = '<div style="margin: 0 0 20px 0;">'
 
-      html += '<div class="main-line" style="font-size: 16px;"><a href="' + entry.url + '">' + entry.title + '</a> '
+      html += '<div class="main-line" style="line-height: 18px; font-size: 14px; margin-bottom: 5px;">'
+
+      html += '<a href="' + entry.url + '" style="color: #1a81ac; font-weight; bold; font-size: 18px;">'
+
+      html +=  entry.title
+
+      if(entry.pdf) {
+        html += '<span style="color:#2baadf;"> [PDF]</span> '
+      }
+
+      html += '</a> '
 
       var metas = []
 
@@ -57,7 +67,7 @@ axios.get("https://spreadsheets.google.com/feeds/list/1Iv93PGR6NiggbdQeksUcc5p8R
       if(entry.author) {
         var author = ' by '
         if(entry.authorurl) {
-          author += '<a href="' + entry.authorurl + '" class="author">' + entry.author + '</a>'
+          author += '<a href="' + entry.authorurl + '" class="author" style="color: #666;">' + entry.author + '</a>'
         }
         else {
           author += '<span class="author">' + entry.author + '</span>'
@@ -76,7 +86,7 @@ axios.get("https://spreadsheets.google.com/feeds/list/1Iv93PGR6NiggbdQeksUcc5p8R
       html += '<span class="meta" style="color: #666;">' + metas.join(' - ') + '</span>' + '</div>'
 
       if(entry.description) {
-        html += '<div class="description" style="padding: 0 5px 0 0;">' + entry.description + '</div>'
+        html += '<div class="description" style="padding: 0 5px 0 0;' + (entry.quote ? 'font-style: italic;' : '') + '">' + entry.description + '</div>'
       }
 
       html += '</div>'
