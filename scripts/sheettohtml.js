@@ -1,16 +1,16 @@
-const axios            = require('axios')
-const colors           = require('colors')
-const fs               = require('fs')
-const argparse         = require('argparse')
-const ncp              = require('copy-paste')
+var axios            = require('axios')
+var colors           = require('colors')
+var fs               = require('fs')
+var argparse         = require('argparse')
+var ncp              = require('copy-paste')
 
-const parser = new argparse.ArgumentParser({
+var parser = new argparse.ArgumentParser({
   addHelp: true,
   description: "Grabs data from the sheet, generates the HTML for newsletter"
 })
 parser.addArgument(['--output', '-o'], {help: 'Where we save the HTML'})
 
-let args = parser.parseArgs()
+var args = parser.parseArgs()
 
 axios.get("https://spreadsheets.google.com/feeds/list/1Iv93PGR6NiggbdQeksUcc5p8RX8pMRk3SLPRp_m-w7g/od6/public/values?alt=json")
   .then((data) => {
@@ -86,7 +86,7 @@ axios.get("https://spreadsheets.google.com/feeds/list/1Iv93PGR6NiggbdQeksUcc5p8R
       html += '<span class="meta" style="color: #666;">' + metas.join(' - ') + '</span>' + '</div>'
 
       if(entry.description) {
-        html += '<div class="description" style="padding: 0 5px 0 0;' + (entry.quote ? 'font-style: italic;' : '') + '">' + entry.description + '</div>'
+        html += '<div class="description" style="padding: 0 5px 0 0; font-size: 14px; line-height: 1.4;' + (entry.quote ? 'font-style: italic;' : '') + '">' + entry.description + '</div>'
       }
 
       html += '</div>'
