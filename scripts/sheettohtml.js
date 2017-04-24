@@ -76,7 +76,7 @@ axios.get("https://spreadsheets.google.com/feeds/list/1Iv93PGR6NiggbdQeksUcc5p8R
       }
 
       if(entry.extra) {
-        metas.push('<span class="extra">' + entry.extra + '</span>')
+        metas.push('<span class="extra" style="' + (entry.paid ? 'color: #111;' : '') + '">' + entry.extra + '</span>')
       }
 
       if(entry.domain) {
