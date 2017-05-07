@@ -12,6 +12,20 @@ function requireAdmin (req, res, next) {
   res.redirect('/');
 }
 
+function getIssueEntries (issueId, done) {
+  Issue.where({_id: mongoose.Types.ObjectId(issueId)}).exec((err, result) => {
+    var scope =  {};
+    if(err) {
+      scope.error = err;
+    }
+    else {
+      scope.issue = result[0];
+    }
+    var entryIds = scope.issue.entryIds || [];
+    Entry.find({_id: {$in: entryIds}, deleted: false}, done);
+  })
+}
+
 router.post('/addentry', requireAdmin, function(req, res, next) {
   var entry = req.body
   entry.status = 'pending';
@@ -100,23 +114,23 @@ router.get('/issues', requireAdmin, function(req, res, next) {
 });
 
 router.get('/issue/:id', requireAdmin, function(req, res, next) {
-  Issue.where({_id: mongoose.Types.ObjectId(req.params.id)}).exec((err, result) => {
-    var scope =  {};
-    if(err) {
-      scope.error = err;
-    }
-    else {
-      scope.issue = result[0];
-    }
-    var entryIds = scope.issue.entryIds || [];
-    Entry.find({_id: {$in: entryIds}, deleted: false}, (err, results) => {
-      scope.issueEntries = results;
-      Entry.find({_id: {$nin: entryIds}, deleted: false, status: 'approved'}, (err, results) => {
+  Issue.find({_id: mongoose.Types.ObjectId(req.params.id)}, (err, issue) => {
+    var scope = {issue: issue[0]};
+    getIssueEntries(req.params.id, (err, entries) => {
+      scope.issueEntries = entries;
+      Entry.find({_id: {$nin: entries.map((e) => {return e._id})}, deleted: false, status: 'approved'}, (err, results) => {
         scope.approvedEntries = results;
         res.render('manager/issues/edit_issue', scope);
       });
-    })
-    
+    });
+  });
+});
+
+router.get('/issue/:id/html', requireAdmin, function(req, res, next) {
+  getIssueEntries(req.params.id, (err, entries) => {
+    var scope = {};
+    scope.entries = entries;
+    res.render('manager/issues/html', scope);
   });
 });
 
@@ -129,8 +143,6 @@ router.post('/issue/:id/delete', requireAdmin, function(req, res, next) {
     res.redirect('/manager/issues');
   });
 });
-
-module.exports = router;
 
 
 router.post('/issue/:id', requireAdmin, function(req, res, next) {
@@ -150,7 +162,9 @@ router.post('/issue/:id/entries', requireAdmin, function(req, res, next) {
       return res.send(error);
     }
 
-    res.send({success: true});
+    getIssueEntries(req.params.id, (err, entries) => {
+      res.render('manager/issues/html', {entries: entries});
+    });
   });
 });
 

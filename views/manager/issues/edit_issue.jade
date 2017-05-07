@@ -22,7 +22,8 @@ block content
       .card-block
         input(type="hidden" id="issue-id" value="#{issue._id}")
         mixin entryDrag (entry)
-          li.ui-state-default(id="#{entry._id}")= entry.title + ' by ' + entry.author
+          li.ui-state-default.newsletter-rest(id="#{entry._id}")
+            +entry(entry)
 
         .row
           .col-md-6
@@ -36,3 +37,5 @@ block content
             ul.issue-entries-sorting#entries-include
               each e in issueEntries
                 +entryDrag(e)
+
+        textarea#issue-html.form-control(rows="10")
