@@ -1,4 +1,44 @@
+mixin entry(entry)
+  .entry(style="margin: 0 0 20px 0;")
+    .main-line(style="line-height: 18px; font-size: 14px; margin-bottom: 5px;")
+      a(href="#{entry.url}" style="color: #1a81ac; font-weight; bold; font-size: 18px;")
+        = entry.title
+        if entry.pdf
+          span(style="color: #2baadf;")  [PDF]
+
+      -var metas = []
+      if entry.author
+        if entry.authorUrl
+          -metas.push(' by <a href="' + entry.authorUrl + '" style="color: #666;" class="author">' + entry.author + '</a>')
+        else
+          -metas.push(' by <span class="author">' + entry.author + '</span>')
+
+      if entry.extraInfo
+        -metas.push('<span class="extra" style="' + (entry.paid ? 'color: #111;' : '') + '">' + entry.extraInfo + '</span>')
+      
+      if entry.domain
+        -metas.push('<span class="domain" style="font-family: Courier New;">' + entry.domain + '</span>')
+
+      
+      if metas.length > 0
+        !='<span class="meta" style="color: #666;">' + metas.join(' - ') + '</span>'
+
+
+    if entry.description
+      .description(style="padding: 0px 5px 00 0; font-size: 14px; line-height: 1.4; #{entry.descriptionIsQuote ? 'font-style: italic;' : ''}")
+        = entry.description
+
+
 mixin entry_form_items (entry)
+  .form-group.row
+    .col-md-2
+      label Status
+    .col-md-10
+      select.form-control(name="status")
+        option(value="pending" selected=(entry.status == 'pending' ? "selected" : undefined)) pending
+        option(value="approved" selected=(entry.status == 'approved' ? "selected" : undefined)) approved
+        option(value="sent" selected=(entry.status == 'sent' ? "selected" : undefined)) sent
+        option(value="rejected" selected=(entry.status == 'rejected' ? "selected" : undefined)) rejected
   .form-group.row
     .col-md-2
       label URL

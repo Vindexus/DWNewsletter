@@ -1,11 +1,14 @@
-extends ../../layout
-include _entry_form_items
-include _entry
+extends ../layout
 block content
   .container
-    .card.mb-5
-      .card-header 
-        h1 Edit Entry
+    .card.mb-4
+      .card-header
+        .row
+          .col-md-10
+            h1 Edit Entry
+          .col-md-2.text-right
+            form(method="POST" action="/manager/entry/#{entry._id}/delete")
+              button.btn.btn-danger Delete
       .card-block
         form(method="POST" action="/manager/entry/#{entry._id}")
           +entry_form_items(entry)
@@ -13,7 +16,7 @@ block content
             .col-md-10.offset-md-2
               button.btn.btn-primary Save Entry
 
-    .card
+    .card.mb-2
       .card-header Preview
       .card-block
         .newsletter-reset

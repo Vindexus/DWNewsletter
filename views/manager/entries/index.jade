@@ -1,6 +1,4 @@
-extends ../../layout
-include _entry_form_items
-include _entry
+extends ../layout
 block content
   .container
     .card.mb-2
@@ -14,15 +12,17 @@ block content
               button.btn.btn-primary(type="submit") Add Entry
     .card
       .card-header 
-        h2 Items
+        h2 Entries
       .card-block
         if error
           .alert.alert-danger= error
         if entries
-          .newsletter-reset
             each entry in entries
               .row
                 .col-md-10
+                  .newsletter-reset
+                    +entry(entry)
+                .col-md-2.text-right
                   .badge-container.mb-1(style="font-size: 1.5em;")
                     if entry.status == 'approved'
                       .badge.badge-pill.badge-success Approved
@@ -30,6 +30,5 @@ block content
                       .badge.badge-pill.badge-warning Pending
                     if entry.status == 'sent'
                       .badge.badge-pill.badge-info sent
-                  +entry(entry)
-                .col-md-2
+
                   a.btn.btn-outline-primary(href='/manager/entry/#{entry._id}') Edit

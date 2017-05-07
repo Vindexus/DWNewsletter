@@ -1,0 +1,16 @@
+mixin issue_form_items (issue)
+  .form-group.row
+    .col-md-2
+      label Title
+    .col-md-10
+      input.form-control(name="title" type="text" value="#{issue.title || ''}")
+  .form-group.row
+    .col-md-2
+      label Subject
+    .col-md-10
+      input.form-control(name="subject" type="text" value="#{issue.subject || ''}")
+  .form-group.row
+    .col-md-2
+      label Send Date
+    .col-md-10
+      input.form-control(name="sendDate" type="text" value="#{issue.sendDate || ''}")

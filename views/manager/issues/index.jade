@@ -1,0 +1,32 @@
+extends ../layout
+block content
+  .container
+    .card.mb-2
+      .card-header
+        h2 Add Issue
+      .card-block
+        form.mb-2(method="post" action="/manager/addissue")
+          +issue_form_items({})
+          .form-group.row
+            .col-md-10.offset-md-2
+              button.btn.btn-primary(type="submit") Add Issue
+    .card.mb-2
+      .card-header 
+        h2 Issues
+      .card-block
+        if error
+          .alert.alert-danger= error
+        table.table
+          thead
+            tr
+              th Send Date
+              th Title
+              th Subject
+          tbody
+            each issue in issues
+              tr
+                td= issue.sendDate.toString()
+                td= issue.title
+                td= issue.subject
+                td
+                  a.btn.btn-outline-primary(href="/manager/issue/#{issue._id}") Edit

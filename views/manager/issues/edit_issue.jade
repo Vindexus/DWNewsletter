@@ -1,0 +1,38 @@
+extends ../layout
+block content
+  .container
+    .card.mb-4
+      .card-header
+        .row
+          .col-md-10
+            h1 Edit Issue
+          .col-md-2.text-right
+            form(method="POST" action="/manager/issue/#{issue._id}/delete")
+              button.btn.btn-danger Delete
+      .card-block
+        form(method="POST" action="/manager/issue/#{issue._id}")
+          +issue_form_items(issue)
+          .form-group
+            .col-md-10.offset-md-2
+              button.btn.btn-primary Save Issue
+
+    .card.mb-2
+      .card-header
+        h2 Entries
+      .card-block
+        input(type="hidden" id="issue-id" value="#{issue._id}")
+        mixin entryDrag (entry)
+          li.ui-state-default(id="#{entry._id}")= entry.title + ' by ' + entry.author
+
+        .row
+          .col-md-6
+            h2 Excluded Approved Entries
+            ul.issue-entries-sorting#entries-exclude
+              each e in approvedEntries
+                +entryDrag(e)
+
+          .col-md-6
+            h2 Included Entries
+            ul.issue-entries-sorting#entries-include
+              each e in issueEntries
+                +entryDrag(e)
