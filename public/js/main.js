@@ -1,13 +1,18 @@
 console.log('Welcome to Dungeon World Newsletter. Thanks for checking out my console!')
 $(document).ready( function () {
     // I only have one form on the page but you can be more specific if need be.
-    var $form = $('form');
+    var $form = $('form#signup');
 
     $form.submit(function (e) {
       e.preventDefault()
-      console.log('submitting')
       register($form)
-    })
+    });
+
+    var firstInput = $('form input:eq(0)');
+
+    if(firstInput) {
+      firstInput.focus();
+    }
 });
 
 function successMsg (msg) {

@@ -1,0 +1,20 @@
+extends ../../layout
+include _entry_form_items
+include _entry
+block content
+  .container
+    .card.mb-5
+      .card-header 
+        h1 Edit Entry
+      .card-block
+        form(method="POST" action="/manager/entry/#{entry._id}")
+          +entry_form_items(entry)
+          .form-group
+            .col-md-10.offset-md-2
+              button.btn.btn-primary Save Entry
+
+    .card
+      .card-header Preview
+      .card-block
+        .newsletter-reset
+          +entry(entry)

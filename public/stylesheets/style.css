@@ -74,3 +74,12 @@ a {
   opacity: 1;
   color: #0275d8;
 }
+
+.newsletter-reset {
+  width: 564px;
+  color: #202020;
+  font-family: Helvetica;
+  font-size: 16px;
+  line-height: 150%;
+  text-align: left;
+}

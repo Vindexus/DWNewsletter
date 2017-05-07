@@ -1,0 +1,35 @@
+extends ../../layout
+include _entry_form_items
+include _entry
+block content
+  .container
+    .card.mb-2
+      .card-header
+        h2 Add Entry
+      .card-block
+        form.mb-2(method="post" action="/manager/addentry")
+          +entry_form_items({})
+          .form-group.row
+            .col-md-10.offset-md-2
+              button.btn.btn-primary(type="submit") Add Entry
+    .card
+      .card-header 
+        h2 Items
+      .card-block
+        if error
+          .alert.alert-danger= error
+        if entries
+          .newsletter-reset
+            each entry in entries
+              .row
+                .col-md-10
+                  .badge-container.mb-1(style="font-size: 1.5em;")
+                    if entry.status == 'approved'
+                      .badge.badge-pill.badge-success Approved
+                    if entry.status == 'pending'
+                      .badge.badge-pill.badge-warning Pending
+                    if entry.status == 'sent'
+                      .badge.badge-pill.badge-info sent
+                  +entry(entry)
+                .col-md-2
+                  a.btn.btn-outline-primary(href='/manager/entry/#{entry._id}') Edit

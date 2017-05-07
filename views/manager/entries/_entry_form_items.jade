@@ -1,0 +1,53 @@
+mixin entry_form_items (entry)
+  .form-group.row
+    .col-md-2
+      label URL
+    .col-md-10
+      input.form-control(name="url" type="text" value="#{entry.url || ''}")
+  .form-group.row
+    .col-md-2
+      label Title
+    .col-md-10
+      input.form-control(name="title" type="text" value="#{entry.title || ''}")
+  .form-group.row
+    .col-md-2
+      label Extra Info
+    .col-md-10
+      input.form-control(name="extraInfo" type="text" value="#{entry.extraInfo || ''}")
+  .form-group.row
+    .col-md-2
+      label Domain
+    .col-md-10
+      input.form-control(name="domain" type="text" value="#{entry.domain || ''}")
+  .form-group.row
+    .col-md-2
+      label Description
+    .col-md-10
+      textarea.form-control(name="description" type="text" rows="3")
+        | #{entry.description || ''}
+      label.custom-control.custom-checkbox
+        input.custom-control-input(type="checkbox" name="descriptionIsQuote" value="1" checked=(entry.descriptionIsQuote ? "checked" : undefined))
+        span.custom-control-indicator
+        span.custom-control-description Is a quote
+  .form-group.row
+    .col-md-2
+      label Author
+    .col-md-10
+      input.form-control(name="author" type="text" value="#{entry.author || ''}")
+  .form-group.row
+    .col-md-2
+      label Author URL
+    .col-md-10
+      input.form-control(name="authorUrl" type="text" value="#{entry.authorUrl || ''}")
+  .form-group.row
+    .col-md-10.offset-md-2
+      label.custom-control.custom-checkbox
+        input.custom-control-input(type="checkbox" name="paid" value="1" checked=(entry.paid ? "checked" : undefined))
+        span.custom-control-indicator
+        span.custom-control-description Paid
+  .form-group.row
+    .col-md-10.offset-md-2
+      label.custom-control.custom-checkbox
+        input.custom-control-input(type="checkbox" name="pdf" value="1" checked=(entry.pdf ? "checked" : undefined))
+        span.custom-control-indicator
+        span.custom-control-description PDF
