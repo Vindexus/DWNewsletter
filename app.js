@@ -17,7 +17,7 @@ var manager                 = require('./routes/manager');
 var passport = require('passport')
   , LocalStrategy = require('passport-local').Strategy;
 
-mongoose.connect('mongodb://localhost/passport_local_mongoose_express4');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/passport_local_mongoose_express4');
 
 var app = express();
 
