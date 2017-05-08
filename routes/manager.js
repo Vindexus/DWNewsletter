@@ -22,7 +22,22 @@ function getIssueEntries (issueId, done) {
       scope.issue = result[0];
     }
     var entryIds = scope.issue.entryIds || [];
-    Entry.find({_id: {$in: entryIds}, deleted: false}, done);
+    Entry.find({_id: {$in: entryIds}, deleted: false}, (err, entries) => {
+      if(err) {
+        return done(err);
+      }
+
+      const map = entries.reduce((m, entry, index) => {
+        m[entry._id] = entry;
+        return m
+      }, {});
+
+      var sorted = scope.issue.entryIds.map((id) => {
+        return map[id]
+      })
+
+      return done(null, sorted);
+    });
   })
 }
 
