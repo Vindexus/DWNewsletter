@@ -1,0 +1,12 @@
+extends ../layout
+block content
+  .container
+    .card.mb-2
+      .card-header
+        h2 Add Entry
+      .card-block
+        form.mb-2(method="post" action="/entries/create")
+          +entry_form_items({})
+          .form-group.row
+            .col-md-10.offset-md-2
+              button.btn.btn-primary(type="submit") Add Entry

@@ -30,7 +30,7 @@ router.get('/login', function(req, res) {
 });
 
 router.post('/login', passport.authenticate('local'), function(req, res) {
-    res.redirect('/manager');
+    res.redirect('/entries');
 });
 
 router.get('/logout', function(req, res) {

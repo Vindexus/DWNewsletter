@@ -1,19 +1,18 @@
 extends ../layout
 block content
   .container
-    .card.mb-2
-      .card-header
-        h2 Add Entry
-      .card-block
-        form.mb-2(method="post" action="/manager/addentry")
-          +entry_form_items({})
-          .form-group.row
-            .col-md-10.offset-md-2
-              button.btn.btn-primary(type="submit") Add Entry
     .card
-      .card-header 
+      .card-header
+        a.btn.btn-primary.float-right(href='/entries/add') Add
         h2 Entries
       .card-block
+        ul.nav.mb-3
+          li.nav-item.mr-1
+            a.nav-link.btn.btn-primary(href='?status=pending') Pending
+          li.nav-item.mr-1
+            a.nav-link.btn.btn-primary(href='?status=approved') Approved
+          li.nav-item.mr-1
+            a.nav-link.btn.btn-primary(href='?status=sent') Sent
         if error
           .alert.alert-danger= error
         if entries
@@ -31,4 +30,4 @@ block content
                     if entry.status == 'sent'
                       .badge.badge-pill.badge-info sent
 
-                  a.btn.btn-outline-primary(href='/manager/entry/#{entry._id}') Edit
+                  a.btn.btn-outline-primary(href='/entries/#{entry._id}') Edit

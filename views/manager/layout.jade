@@ -3,7 +3,7 @@ include issues/mixins
 doctype html
 html
   head
-    title Dungeon World Newsletter - DW content in your inbox
+    title= title || 'DWN'
     link(href="https://fonts.googleapis.com/css?family=EB+Garamond" rel="stylesheet")
 
     link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous")
@@ -38,8 +38,8 @@ html
         #navbarNav.collapse.navbar-collapse
           ul.navbar-nav
             li.nav-item
-              a.nav-link(href='/manager') Entries
+              a.nav-link(href='/entries') Entries
             li.nav-item
-              a.nav-link(href='/manager/issues') Issues
+              a.nav-link(href='/issues') Issues
 
     block content

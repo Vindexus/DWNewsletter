@@ -11,7 +11,8 @@ var MongoStore = require('connect-mongo')(session);
 
 
 var index                   = require('./routes/index');
-var manager                 = require('./routes/manager');
+var entries                 = require('./routes/entries');
+var issues                 = require('./routes/issues');
 
 
 var passport = require('passport')
@@ -44,7 +45,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/', index);
-app.use('/manager', manager);
+app.use('/entries', entries);
+app.use('/issues', issues);
 
 // passport config
 var Account = require('./models/account');
