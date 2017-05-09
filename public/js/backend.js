@@ -6,7 +6,7 @@ $(document).ready( function () {
       $('#entries-include li').each(function (index, el) {
         ids.push($(el).attr('id'))
       })
-      $.ajax('/issue/' + $('#issue-id').val() + '/entries', {
+      $.ajax('/issues/' + $('#issue-id').val() + '/entries', {
         contentType: 'application/json',
         type: 'POST',
         data: JSON.stringify({
@@ -19,7 +19,7 @@ $(document).ready( function () {
     }
   }).disableSelection();
 
-  $.ajax('/issue/' + $('#issue-id').val() + '/html', {
+  $.ajax('/issues/' + $('#issue-id').val() + '/html', {
     type: 'GET',
     success: function (data) {
       $('#issue-html').val(data);
