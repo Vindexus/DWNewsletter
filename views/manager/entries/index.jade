@@ -8,11 +8,11 @@ block content
       .card-block
         ul.nav.mb-3
           li.nav-item.mr-1
-            a.nav-link.btn.btn-primary(href='?status=pending') Pending
-          li.nav-item.mr-1
             a.nav-link.btn.btn-primary(href='?status=approved') Approved
           li.nav-item.mr-1
             a.nav-link.btn.btn-primary(href='?status=sent') Sent
+          li.nav-item.mr-1
+            a.nav-link.btn.btn-primary(href='?status=rejected') Rejected
         if error
           .alert.alert-danger= error
         if entries
@@ -25,9 +25,9 @@ block content
                   .badge-container.mb-1(style="font-size: 1.5em;")
                     if entry.status == 'approved'
                       .badge.badge-pill.badge-success Approved
-                    if entry.status == 'pending'
-                      .badge.badge-pill.badge-warning Pending
+                    if entry.status == 'rjected'
+                      .badge.badge-pill.badge-warning Rejected
                     if entry.status == 'sent'
-                      .badge.badge-pill.badge-info sent
+                      .badge.badge-pill.badge-info Sent
 
                   a.btn.btn-outline-primary(href='/entries/#{entry._id}') Edit
