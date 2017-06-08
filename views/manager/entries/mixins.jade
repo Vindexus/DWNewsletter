@@ -37,7 +37,6 @@ mixin entry_form_items (entry)
       label Status
     .col-md-10
       select.form-control(name="status")
-        option(value="pending" selected=(entry.status == 'pending' ? "selected" : undefined)) pending
         option(value="approved" selected=(entry.status == 'approved' ? "selected" : undefined)) approved
         option(value="sent" selected=(entry.status == 'sent' ? "selected" : undefined)) sent
         option(value="rejected" selected=(entry.status == 'rejected' ? "selected" : undefined)) rejected

@@ -111,4 +111,15 @@ router.post('/:id/entries', requireAdmin, function(req, res, next) {
   });
 });
 
+router.post('/:id/entries/sent', requireAdmin, function(req, res, next) {
+  Issue.find({_id: mongoose.Types.ObjectId(req.params.id)}, (err, issue) => {
+    var scope = {issue: issue[0]};
+    getIssueEntries(req.params.id, (err, entries) => {
+      Entry.updateMany({_id: {$in: entries.map((e) => {return e._id})}, deleted: false}, {$set: {status: 'sent'}}, (err, results) => {
+        res.redirect('/issues/' + req.params.id);
+      });
+    });
+  });
+});
+
 module.exports = router;

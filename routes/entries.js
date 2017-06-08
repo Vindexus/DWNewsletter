@@ -7,14 +7,13 @@ var {requireAdmin} = require('../lib/middleware');
 
 router.post('/create', requireAdmin, function(req, res, next) {
   var entry = req.body
-  entry.status = 'pending';
   Entry.create(entry, (err, result) => {
     res.redirect('/entries/' + result._id);
   })
 });
 
 router.get('/', requireAdmin, function(req, res, next) {
-  const status = req.query.status || 'pending';
+  const status = req.query.status || 'approved';
   Entry.where({
     status: status,
     deleted: false
@@ -55,9 +54,6 @@ router.post('/:id/delete', requireAdmin, function(req, res, next) {
     res.redirect('/entries');
   });
 });
-
-module.exports = router;
-
 
 router.post('/:id', requireAdmin, function(req, res, next) {
   var entry = req.body;
