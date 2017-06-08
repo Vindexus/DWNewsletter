@@ -12,12 +12,14 @@ mixin entry(entry)
           -metas.push(' by <a href="' + entry.authorUrl + '" style="color: #666;" class="author">' + entry.author + '</a>')
         else
           -metas.push(' by <span class="author">' + entry.author + '</span>')
+      else
+        -metas.push('')
 
       if entry.extraInfo
         -metas.push('<span class="extra" style="' + (entry.paid ? 'color: #111;' : '') + '">' + entry.extraInfo + '</span>')
       
       if entry.domain
-        -metas.push('<span class="domain" style="font-family: Courier New;">' + entry.domain + '</span>')
+        -metas.push('<a class="domain" style="font-family: Courier New; color: #666; text-decoration: none;" href="http://' + entry.domain + '">' + entry.domain + '</a>')
 
       
       if metas.length > 0
