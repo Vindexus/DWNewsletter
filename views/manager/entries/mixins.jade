@@ -16,7 +16,7 @@ mixin entry(entry)
         -metas.push('')
 
       if entry.extraInfo
-        -metas.push('<span class="extra" style="' + (entry.paid ? 'color: #111;' : '') + '">' + entry.extraInfo + '</span>')
+        -metas.push('<span class="extra" style="' + (entry.paid ? 'color: #111; font-weight: bold;' : '') + '">' + entry.extraInfo + '</span>')
       
       if entry.domain
         -metas.push('<a class="domain" style="font-family: Courier New; color: #666; text-decoration: none;" href="http://' + entry.domain + '">' + entry.domain + '</a>')
