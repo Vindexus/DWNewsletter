@@ -16,10 +16,10 @@ mixin entry(entry)
         -metas.push('') //This just adds the - after the title instead of the " by "
 
       if entry.extraInfo
-        -metas.push('<span class="extra" style="' + (entry.paid ? 'color: #111;' : '') + '">' + entry.extraInfo + '</span>')
+        -metas.push('<span class="extra" style="' + (entry.paid ? 'color: #111; font-weight: bold;' : '') + '">' + entry.extraInfo + '</span>')
       
       if entry.domain
-        -metas.push('<span class="domain" style="font-family: Courier New;">' + entry.domain + '</span>')
+        -metas.push('<a class="domain" style="font-family: Courier New; color: #666; text-decoration: none;" href="http://' + entry.domain + '">' + entry.domain + '</a>')
 
       
       if metas.length > 0
@@ -28,7 +28,7 @@ mixin entry(entry)
 
     if entry.description
       .description(style="padding: 0px 5px 00 0; font-size: 14px; line-height: 1.4; #{entry.descriptionIsQuote ? 'font-style: italic;' : ''}")
-        != entry.description
+        != entry.description.split("\n").join("<br />")
 
 
 mixin entry_form_items (entry)

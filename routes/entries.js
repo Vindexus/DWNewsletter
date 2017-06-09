@@ -17,7 +17,7 @@ router.get('/', requireAdmin, function(req, res, next) {
   Entry.where({
     status: status,
     deleted: false
-  }).sort({created: -1}).exec((err, results) => {
+  }).sort({title: 1}).exec((err, results) => {
     var scope =  {};
     if(err) {
       scope.error = err;
