@@ -8,6 +8,10 @@ body.backend {
   padding-top: 10px;
 }
 
+pre {
+  color: white;
+}
+
 body:before {
   content: " ";
   position: fixed;
@@ -19,21 +23,55 @@ body:before {
   opacity: 0;
 }
 
-h1 {
+h1, h2, h3 {
   font-family: 'EB Garamond', serif;
   font-weight: bold;
+  color: #fff;
 }
 
 a {
   color: #00B7FF;
 }
 
-#landing-page {
+#landing-page,
+#past-issues {
   max-width: 700px;
   padding: 2em;
   background: url(/images/concrete_seamless.png);
   border-radius: 5px;
   margin-bottom: 100px;
+}
+
+#past-issues {
+  padding: 1.5em 2em;
+}
+
+#past-issues ul {
+  padding: 0px;
+  margin: 0px;
+}
+
+#past-issues ul li {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+}
+
+#past-issues ul li a {
+  color: #0275d8;
+}
+
+#past-issues ul li a .date {
+  color: #666;
+}
+
+#past-issues ul li a .date:before {
+  content: " - ";
+}
+
+.container h1,
+.container h2 {
+  color: #000;
 }
 
 #landing-page .hero {

@@ -4,9 +4,13 @@ var router = express.Router();
 var passport = require('passport');
 var Account = require('../models/account');
 
+var issuesUtil = require('../lib/issues');
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', {});
+  issuesUtil.getSent((err, issues) => {
+    res.render('index', {issues: issues});
+  });
 });
 
 router.get('/register', function(req, res) {

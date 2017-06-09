@@ -21,12 +21,12 @@ block content
             tr
               th Send Date
               th Title
-              th Subject
+              th Sent
           tbody
             each issue in issues
               tr
                 td= issue.sendDate.toString()
                 td= issue.title
-                td= issue.subject
+                td= issue.sent ? 'Yes' : 'No'
                 td
                   a.btn.btn-outline-primary(href="/issues/#{issue._id}") Edit

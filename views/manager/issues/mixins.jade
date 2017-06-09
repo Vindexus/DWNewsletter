@@ -6,11 +6,17 @@ mixin issue_form_items (issue)
       input.form-control(name="title" type="text" value="#{issue.title || ''}")
   .form-group.row
     .col-md-2
-      label Subject
-    .col-md-10
-      input.form-control(name="subject" type="text" value="#{issue.subject || ''}")
-  .form-group.row
-    .col-md-2
       label Send Date
     .col-md-10
       input.form-control(name="sendDate" type="text" value="#{issue.sendDate || ''}")
+  .form-group.row
+    .col-md-2
+      label URL
+    .col-md-10
+      input.form-control(name="url" type="text" value="#{issue.url || ''}")
+  .form-group.row
+    .col-md-2
+      label Sent
+      label= issue.sent
+    .col-md-10
+      input.checkbox(type="checkbox" value="1" name="sent" checked=(issue.sent ? "checked" : undefined))

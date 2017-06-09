@@ -12,6 +12,8 @@ mixin entry(entry)
           -metas.push(' by <a href="' + entry.authorUrl + '" style="color: #666;" class="author">' + entry.author + '</a>')
         else
           -metas.push(' by <span class="author">' + entry.author + '</span>')
+      else
+        -metas.push('') //This just adds the - after the title instead of the " by "
 
       if entry.extraInfo
         -metas.push('<span class="extra" style="' + (entry.paid ? 'color: #111;' : '') + '">' + entry.extraInfo + '</span>')

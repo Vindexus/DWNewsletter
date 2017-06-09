@@ -20,6 +20,17 @@ block content
       .response-container.col-sm-8.offset-sm-2
         #signup-response
 
+  if issues
+    #past-issues.container
+      h2 Past Issues
+      ul
+        each issue in issues
+          li
+            a(href="#{issue.url}")
+              span.title= issue.title
+              | 
+              span.date= issue.formattedDate
+
   #about.container
     .container.col-sm-6.col-sm-offset-3
       .about 
