@@ -25,4 +25,26 @@ $(document).ready( function () {
       $('#issue-html').val(data);
     },
   });
+
+  $.getJSON('/entries/authors', function (data) {
+    console.log('data', data);
+    console.log(arguments)
+    var authors = data.authors;
+    $('select[role=author-suggestion]').each(function (index, el) {
+      $(el).html('<option value="-1"></option>' + data.authors.map(function (author) {
+        return '<option value="' + index + '">' + author.name + ' - ' + author.url + '</option>';
+      }).join("\n"));
+
+      $(el).change(function () {
+        var val = $(this).val();
+        val = parseInt(val);
+        if(!isNaN(val) && val >= 0) {
+          var author = authors[val];
+          $('input[name=author]').val(author.name);
+          $('input[name=authorUrl]').val(author.url);
+        }
+      })
+    });
+  })
+  
 });

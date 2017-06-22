@@ -72,6 +72,11 @@ mixin entry_form_items (entry)
         span.custom-control-description Is a quote
   .form-group.row
     .col-md-2
+      label Select Author
+    .col-md-10
+      select.form-control(role="author-suggestion")
+  .form-group.row
+    .col-md-2
       label Author
     .col-md-10
       input.form-control(name="author" type="text" value="#{entry.author || ''}")

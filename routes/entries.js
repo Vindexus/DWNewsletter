@@ -29,6 +29,29 @@ router.get('/', requireAdmin, function(req, res, next) {
   });
 });
 
+router.get('/authors', requireAdmin, function(req, res, next) {
+  Entry.where({
+    deleted: false
+  }).sort({author: 1}).exec((err, results) => {
+    var scope =  {};
+    if(err) {
+      scope.error = err;
+    }
+    else {
+      var authors = [];
+      results.forEach((row) => {
+        authors.push({
+          name: row.author,
+          url: row.authorUrl
+        })
+      })
+      res.send({
+        authors: authors
+      })
+    }
+  });
+});
+
 router.get('/add', requireAdmin, function(req, res, next) {
   res.render('manager/entries/add', {title: 'Add Entry'});
 });
