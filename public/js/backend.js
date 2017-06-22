@@ -55,8 +55,13 @@ $(document).ready( function () {
     if(domain.substr(0, 4) == 'www.') {
       domain = domain.substr(4);
     }
-    console.log('domain', domain);
+    //http://www.drivethrurpg.com/product/210652/10-Treasures-Dwarven-Vault?affiliate_id=815382
     $('input[name=domain]').val(domain);
+    if(domain == 'drivethrurpg.com' && url.indexOf('affiliate_id') == -1) {
+      var delim = url.indexOf('?') == -1 ? '?' : '&';
+      url += delim + '=affiliate_id=815382'
+      $(this).val(url);
+    }
   })
   
 });
