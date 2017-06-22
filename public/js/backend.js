@@ -45,6 +45,18 @@ $(document).ready( function () {
         }
       })
     });
+  });
+
+  $('input[name=url]').blur(function () {
+    var url = $(this).val();
+    var domain = url.replace('http://', '');
+    domain = domain.replace('https://', '');
+    domain = domain.substr(0, domain.indexOf('/'));
+    if(domain.substr(0, 4) == 'www.') {
+      domain = domain.substr(4);
+    }
+    console.log('domain', domain);
+    $('input[name=domain]').val(domain);
   })
   
 });
