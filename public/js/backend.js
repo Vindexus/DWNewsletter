@@ -30,8 +30,8 @@ $(document).ready( function () {
     console.log('data', data);
     console.log(arguments)
     var authors = data.authors;
-    $('select[role=author-suggestion]').each(function (index, el) {
-      $(el).html('<option value="-1"></option>' + data.authors.map(function (author) {
+    $('select[role=author-suggestion]').each(function (i, el) {
+      $(el).html('<option value="-1"></option>' + data.authors.map(function (author, index) {
         return '<option value="' + index + '">' + author.name + ' - ' + author.url + '</option>';
       }).join("\n"));
 
