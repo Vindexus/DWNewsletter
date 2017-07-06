@@ -82,6 +82,7 @@ router.post('/:id', requireAdmin, function(req, res, next) {
   var entry = req.body;
   entry.pdf = !!req.body.pdf;
   entry.paid = !!req.body.paid;
+  entry.descriptionIsQuote = !!req.body.descriptionIsQuote;
   Entry.update({_id: mongoose.Types.ObjectId(req.params.id)}, {$set: entry}).exec((err, result) => {
     if(err) {
       return res.send(error);

@@ -30,6 +30,34 @@ mixin entry(entry)
       .description(style="padding: 0px 5px 00 0; font-size: 14px; line-height: 1.4; #{entry.descriptionIsQuote ? 'font-style: italic;' : ''}")
         != entry.description.split("\n").join("<br />")
 
+mixin entry_md(entry)
+  = '---\n'
+  = '**[' + entry.title + '](' + entry.url + ')**  '
+
+  if(entry.pdf)
+    = ' *[PDF]*'
+  
+  = '\n'
+
+  -var metas = []
+  if entry.author
+    if entry.authorUrl
+      -metas.push('by [' + entry.author + '](' + entry.authorUrl + ')')
+    else
+      -metas.push('by ' + entry.author)
+
+  if entry.extraInfo
+    -metas.push((entry.paid ? '**' : '') + entry.extraInfo + (entry.paid ? '**' : ''))
+  
+  if entry.domain
+    -metas.push('[' + entry.domain + '](http://' + entry.domain + ')')
+  
+  if metas.length > 0
+    != metas.join(' - ')
+    = '  \n\n'
+
+  = entry.descriptionIsQuote ? ('*' + entry.description + '*') : entry.description
+
 
 mixin entry_form_items (entry)
   .form-group.row

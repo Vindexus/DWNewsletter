@@ -77,6 +77,14 @@ router.get('/:id/html', requireAdmin, function(req, res, next) {
   });
 });
 
+router.get('/:id/markdown', requireAdmin, function(req, res, next) {
+  getIssueEntries(req.params.id, (err, entries) => {
+    var scope = {};
+    scope.entries = entries;
+    res.render('manager/issues/markdown', scope);
+  });
+});
+
 
 router.post('/:id/delete', requireAdmin, function(req, res, next) {
   Issue.update({_id: mongoose.Types.ObjectId(req.params.id)}, {$set: {deleted: true}}).exec((err, result) => {

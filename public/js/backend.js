@@ -1,3 +1,12 @@
+function loadMarkdown () {
+  $.ajax('/issues/' + $('#issue-id').val() + '/markdown', {
+    type: 'GET',
+    success: function (data) {
+      $('#issue-markdown').val(data);
+    },
+  });
+}
+
 $(document).ready( function () {
   $( "#entries-exclude, #entries-include" ).sortable({
     connectWith: ".issue-entries-sorting",
@@ -14,6 +23,7 @@ $(document).ready( function () {
         }),
         success: function (data) {
           $('#issue-html').val(data);
+          loadMarkdown()
         },
       });
     }
@@ -25,6 +35,8 @@ $(document).ready( function () {
       $('#issue-html').val(data);
     },
   });
+
+  loadMarkdown();
 
   $.getJSON('/entries/authors', function (data) {
     console.log('data', data);
