@@ -42,4 +42,14 @@ html
             li.nav-item
               a.nav-link(href='/issues') Issues
 
+    .container
+        -messages = getMessages()
+        if messages.success
+            each msg in messages.success
+                .alert.alert-success= msg
+        if messages.error
+            each msg in messages.error
+                .alert.alert-error= msg
+
+
     block content

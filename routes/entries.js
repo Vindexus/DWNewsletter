@@ -8,6 +8,7 @@ var {requireAdmin} = require('../lib/middleware');
 router.post('/create', requireAdmin, function(req, res, next) {
   var entry = req.body
   Entry.create(entry, (err, result) => {
+    req.flash('success', 'Entry created');
     res.redirect('/entries/' + result._id);
   })
 });
@@ -74,6 +75,7 @@ router.post('/:id/delete', requireAdmin, function(req, res, next) {
     if(err) {
       return res.send(error);
     }
+    req.flash('success', 'Entry deleted')
     res.redirect('/entries');
   });
 });
@@ -85,9 +87,12 @@ router.post('/:id', requireAdmin, function(req, res, next) {
   entry.descriptionIsQuote = !!req.body.descriptionIsQuote;
   Entry.update({_id: mongoose.Types.ObjectId(req.params.id)}, {$set: entry}).exec((err, result) => {
     if(err) {
-      return res.send(error);
+      req.flash('error', error.toString());
+      console.log('error');
     }
-
+    else {
+      req.flash('success', 'Entry updated')
+    }
     res.redirect('/entries/' + req.params.id);
   });
 });

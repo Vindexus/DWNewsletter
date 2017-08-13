@@ -6,7 +6,8 @@ var cookieParser            = require('cookie-parser');
 var bodyParser              = require('body-parser');
 var mongoose                = require('mongoose');
 var session                 = require('express-session');
-
+var flash                   = require('express-flash-messages')
+ 
 var MongoStore = require('connect-mongo')(session);
 
 
@@ -27,6 +28,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.use(express.static('public'));
+
+app.use(flash())
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -74,7 +77,6 @@ app.use(function(err, req, res, next) {
   console.log('req.user aaaa', req.user);
   req.session.count = req.session.count || 1
   req.session.count++
-  console.log('req.session.count', req.session.count);
   res.status(err.status || 500);
   res.render('error', {
     message: err.message,

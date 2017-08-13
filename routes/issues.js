@@ -37,6 +37,7 @@ function getIssueEntries (issueId, done) {
 router.post('/create', requireAdmin, function(req, res, next) {
   var entry = req.body
   Issue.create(entry, (err, result) => {
+    req.flash('success', 'Issues updated')
     res.redirect('/issues/' + result._id);
   })
 });
@@ -89,8 +90,10 @@ router.get('/:id/markdown', requireAdmin, function(req, res, next) {
 router.post('/:id/delete', requireAdmin, function(req, res, next) {
   Issue.update({_id: mongoose.Types.ObjectId(req.params.id)}, {$set: {deleted: true}}).exec((err, result) => {
     if(err) {
+
       return res.send(error);
     }
+    req.flash('success', 'Issue deleted')
     res.redirect('/issues');
   });
 });
@@ -100,9 +103,11 @@ router.post('/:id', requireAdmin, function(req, res, next) {
   var issue = req.body;
   Issue.update({_id: mongoose.Types.ObjectId(req.params.id)}, {$set: issue}).exec((err, result) => {
     if(err) {
-      return res.send(error);
+      req.flash('error', err.toString());
     }
-
+    else {
+      req.flash('success', 'Issue updated')
+    }
     res.redirect('/issues/' + req.params.id);
   });
 });
@@ -124,6 +129,12 @@ router.post('/:id/entries/sent', requireAdmin, function(req, res, next) {
     var scope = {issue: issue[0]};
     getIssueEntries(req.params.id, (err, entries) => {
       Entry.updateMany({_id: {$in: entries.map((e) => {return e._id})}, deleted: false}, {$set: {status: 'sent'}}, (err, results) => {
+        if(err) {
+          req.flash('error', err.toString());
+        }
+        else {
+          req.flash('success', 'Entries set as sent')
+        }
         res.redirect('/issues/' + req.params.id);
       });
     });
