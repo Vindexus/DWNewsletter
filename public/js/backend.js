@@ -2,7 +2,16 @@ function loadMarkdown () {
   $.ajax('/issues/' + $('#issue-id').val() + '/markdown', {
     type: 'GET',
     success: function (data) {
-      $('#issue-markdown').val(data);
+      $('#issue-markdown').val(data.split('"').join('&quot;'));
+    },
+  });
+}
+function loadMarkdownGPlus () {
+  $.ajax('/issues/' + $('#issue-id').val() + '/markdown-gplus', {
+    type: 'GET',
+    success: function (data) {
+      console.log('data.indexOf("&quo")',data.indexOf("&quo"));
+      $('#issue-markdown-gplus').val(data.split('&quot;').join('"'));
     },
   });
 }
@@ -24,6 +33,7 @@ $(document).ready( function () {
         success: function (data) {
           $('#issue-html').val(data);
           loadMarkdown()
+          loadMarkdownGPlus();
         },
       });
     }
@@ -37,10 +47,9 @@ $(document).ready( function () {
   });
 
   loadMarkdown();
+  loadMarkdownGPlus();
 
   $.getJSON('/entries/authors', function (data) {
-    console.log('data', data);
-    console.log(arguments)
     var authors = data.authors;
     $('select[role=author-suggestion]').each(function (i, el) {
       $(el).html('<option value="-1"></option>' + data.authors.map(function (author, index) {
@@ -75,5 +84,4 @@ $(document).ready( function () {
       $(this).val(url);
     }
   })
-  
 });

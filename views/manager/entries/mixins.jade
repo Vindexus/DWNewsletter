@@ -65,7 +65,37 @@ mixin entry_md(entry)
   - description = entry.description
   - description = description.split(/<em>|<\/em>/g).join('*')
   - description = description.split(/<strong>|<\/strong>/g).join('**')
-  = entry.descriptionIsQuote ? ('*' + description + '*') : description
+  != entry.descriptionIsQuote ? ('*' + description + '*') : description
+
+mixin entry_md_gplus(entry)
+  ='-'.repeat(10)
+  ='\n\n'
+  = '*' + entry.title + '*'
+
+  if entry.url
+    = ': ' + entry.url + '  '
+
+  = '\n'
+
+  -var metas = []
+  if entry.author
+    if entry.authorUrl
+      ='by ' + entry.author + ': ' + entry.authorUrl
+    else
+      ='by ' + entry.author
+    ='\n'
+
+  if entry.extraInfo
+    -metas.push((entry.paid ? '*' : '') + entry.extraInfo + (entry.paid ? '*' : ''))
+
+  if metas.length > 0
+    != metas.join(' - ')
+    = '  \n\n'
+
+  - description = entry.description
+  - description = description.split(/<em>|<\/em>/g).join('_')
+  - description = description.split(/<strong>|<\/strong>|\*\*/g).join('*')
+  != entry.descriptionIsQuote ? ('_' + description + '_') : description
 
 
 mixin entry_form_items (entry)
