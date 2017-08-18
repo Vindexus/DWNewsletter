@@ -20,11 +20,11 @@ mixin entry(entry)
 
       if entry.extraInfo
         -metas.push('<span class="extra" style="' + (entry.paid ? 'color: #111; font-weight: bold;' : '') + '">' + entry.extraInfo + '</span>')
-      
+
       if entry.domain
         -metas.push('<a class="domain" style="font-family: Courier New; color: #666; text-decoration: none;" href="http://' + entry.domain + '">' + entry.domain + '</a>')
 
-      
+
       if metas.length > 0
         !='<span class="meta" style="color: #666;">' + metas.join(' - ') + '</span>'
 
@@ -35,11 +35,14 @@ mixin entry(entry)
 
 mixin entry_md(entry)
   = '---\n'
-  = '**[' + entry.title + '](' + entry.url + ')**  '
+  if entry.url
+    = '**[' + entry.title + '](' + entry.url + ')**  '
+  else
+    = '**' + entry.title + '**  '
 
   if(entry.pdf)
     = ' *[PDF]*'
-  
+
   = '\n'
 
   -var metas = []
@@ -51,15 +54,18 @@ mixin entry_md(entry)
 
   if entry.extraInfo
     -metas.push((entry.paid ? '**' : '') + entry.extraInfo + (entry.paid ? '**' : ''))
-  
+
   if entry.domain
     -metas.push('[' + entry.domain + '](http://' + entry.domain + ')')
-  
+
   if metas.length > 0
     != metas.join(' - ')
     = '  \n\n'
 
-  = entry.descriptionIsQuote ? ('*' + entry.description + '*') : entry.description
+  - description = entry.description
+  - description = description.split(/<em>|<\/em>/g).join('*')
+  - description = description.split(/<strong>|<\/strong>/g).join('**')
+  = entry.descriptionIsQuote ? ('*' + description + '*') : description
 
 
 mixin entry_form_items (entry)
