@@ -3,6 +3,10 @@ var Schema = mongoose.Schema;
 
 var Entry = new Schema({
     status: String,
+    type: {
+        type: String,
+        default: 'link'
+    },
     title: String,
     description: String,
     descriptionIsQuote: {type: Boolean, default: false},

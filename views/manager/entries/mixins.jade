@@ -70,6 +70,56 @@ mixin entry_form_items (entry)
         option(value="rejected" selected=(entry.status == 'rejected' ? "selected" : undefined)) rejected
   .form-group.row
     .col-md-2
+      label Type
+    .col-md-10
+      select.form-control(name="type")
+        option(value="link" selected=(entry.type == 'link' ? "selected" : undefined)) link
+        option(value="monster" selected=(entry.type == 'monster' ? "selected" : undefined)) monster
+        option(value="item" selected=(entry.type == 'item' ? "selected" : undefined)) item
+
+  if entry.type == 'monster'
+    hr
+    .form-group.row
+      .col-md-2
+        label Name
+      .col-md-10
+        input.form-control(name="name" type="text" value="#{entry.name || ''}")
+
+    .form-group.row
+      .col-md-2
+        label Tags
+      .col-md-10
+        input.form-control(name="tags" type="text" value="#{entry.tags || ''}")
+
+    .form-group.row
+      .col-md-2
+        label Attack
+      .col-md-10
+        input.form-control(name="attack" type="text" value="#{entry.attack || ''}")
+
+    .form-group.row
+      .col-md-2
+        label HP
+      .col-md-10
+        input.form-control(name="hp" type="text" value="#{entry.hp || ''}")
+
+    .form-group.row
+      .col-md-2
+        label Armor
+      .col-md-10
+        input.form-control(name="armor" type="text" value="#{entry.armor || ''}")
+
+    .form-group.row
+      .col-md-2
+        label Description
+      .col-md-10
+        textarea.form-control(name="monsterDescription" type="text")
+          | #{entry.monsterDescription || ''}
+
+    hr
+  if entry.type == 'link'
+  .form-group.row
+    .col-md-2
       label URL
     .col-md-10
       input.form-control(name="url" type="text" value="#{entry.url || ''}")
