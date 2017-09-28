@@ -25,7 +25,7 @@ block content
           tbody
             each issue in issues
               tr
-                td= issue.sendDate.toString()
+                td= issue.sendDate ? issue.sendDate.toString() : ''
                 td= issue.title
                 td= issue.sent ? 'Yes' : 'No'
                 td
