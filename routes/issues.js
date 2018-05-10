@@ -21,12 +21,17 @@ function getIssueEntries (issueId, done) {
       }
 
       const map = entries.reduce((m, entry, index) => {
-        m[entry._id] = entry;
+        if (entry) {
+          m[entry._id] = entry;
+        }
         return m
       }, {});
 
       var sorted = scope.issue.entryIds.map((id) => {
         return map[id]
+      })
+      .filter((item) => {
+        return !!item
       })
 
       return done(null, sorted);
