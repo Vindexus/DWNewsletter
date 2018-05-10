@@ -63,7 +63,9 @@ router.get('/:id', requireAdmin, function(req, res, next) {
     getIssueEntries(req.params.id, (err, entries) => {
       scope.issueEntries = entries;
       const eids = entries
-        .filter((e) => return !!e)
+        .filter((e) => {
+          return !!e
+        })
         .map((e) => {return e._id})
       Entry.find({_id: {$nin: eids}, deleted: false, status: 'approved'}, (err, results) => {
         scope.approvedEntries = results;
